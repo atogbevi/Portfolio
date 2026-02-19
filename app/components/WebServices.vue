@@ -70,8 +70,8 @@
     class="fixed inset-0 z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto"
     :class="active ? 'translate-y-0' : 'translate-y-full'">
     <div class="fixed inset-0 bg-stone-900 text-stone-400 overflow-y-auto">
-      <button @click="$emit('close')" class="absolute top-6 right-6 text-white text-xl">
-        <Icon icon="mdi:close" class="size-6" />
+      <button @click="$emit('close')" class="absolute top-20 right-6 text-white hover:text-secondaryText transition-all duration-300 ease-linea">
+        <Icon icon="mdi:close" class="size-8" />
       </button>
 
       <div class="w-4/5 mx-auto py-20 lg:w-3/5">
