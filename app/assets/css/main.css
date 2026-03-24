@@ -32,6 +32,12 @@ q {
   --accentMedium: #a1a1aa;         /* éléments secondaires neutres */
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* @layer base {
   :root {
     --primary: #043EE7;

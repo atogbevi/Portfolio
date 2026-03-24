@@ -12,32 +12,39 @@
             id: 1,
             title: 'Icy Kangaroo',
             description: 'UI Design',
-            image: '/images/designs/web1.jpg',
-            link: 'https://www.figma.com/design/4Ie8e5F4hkRvzooPlaKzsc/Designs?node-id=273-2&t=Djd3qDGdQddCNEJr-1',
+            image: '/images/designs/kangaroo.jpg',
+            link: 'https://www.figma.com/design/4Ie8e5F4hkRvzooPlaKzsc/Designs?node-id=424-201&t=KaE1FeRO5Q0YGTv5-1',
         },
         {
             id: 2,
             title: 'Carte de Mariage',
             description: 'UI Design',
-            image: '/images/designs/web2.jpg',
+            image: '/images/designs/carte.jpg',
             link: 'https://www.figma.com/design/n69XWHzsDuXaV7qIDPaLSj/Carte-de-Mariage?node-id=88-43&t=EwjdvDvmtgwpgWco-1',
         },
         {
             id: 3,
+            title: 'Ustudi',
+            description: 'UI Design',
+            image: '/images/designs/ustudi.jpg',
+            link: 'https://www.figma.com/design/vj24iYVuMENyka3H8KXuZO/USTUDI?node-id=7-616&t=LAQxweckwI3N65xy-1',
+        },
+        {
+            id: 4,
             title: 'KIZO',
             description: 'Media Post',
             image: '/images/designs/dsg1.jpg',
             link: 'https://www.google.com',
         },
         {
-            id: 4,
+            id: 5,
             title: 'Bot-Coin',
             description: 'Sticker Design',
-            image: '/images/designs/dsg1.jpg',
+            image: '/images/designs/dsg2.jpg',
             link: 'https://www.google.com',
         },
         {
-            id: 5,
+            id: 6,
             title: 'Project 5',
             description: 'Project 5 description',
             image: '/images/designs/dsg1.jpg',
@@ -74,22 +81,23 @@
                 </div>
 
                 <!-- Projects -->
+                <!-- Web designs -->
                 <div class="mt-40">
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
                         <div
-                            v-for="project in projects.slice(0, 2)"
+                            v-for="project in projects.slice(0, 3)"
                             :key="project.id"
-                            class="flex flex-1 min-w-0 flex-col overflow-hidden bg-cardBg hover:scale-[0.98] transition-transform duration-500"
-                            >
-                            <a :href="project.link" target="_blank" class="group">
-                                <div class="aspect-[3/4] w-full overflow-hidden">
+                            class="flex min-w-0 flex-col overflow-hidden bg-cardBg hover:scale-[0.98] transition-transform duration-500"
+                        >
+                            <a :href="project.link" target="_blank" class="group flex min-h-0 flex-1 flex-col">
+                                <div class="flex w-full max-h-96 shrink-0 items-center justify-center overflow-hidden bg-accentLight">
                                     <img
                                         :src="project.image"
                                         :alt="project.title"
-                                        class="h-full w-full object-cover"
+                                        class="max-h-96 w-full object-contain"
                                     />
                                 </div>
-                                <div class="flex items-center justify-between gap-4 border-t border-borderLight px-4 py-3">
+                                <div class="mt-auto flex items-center justify-between gap-4 border-t border-borderLight px-4 py-3">
                                     <p class="font-medium text-primaryText truncate">{{ project.title }}</p>
                                     <p class="text-sm text-secondaryText shrink-0">{{ project.description }}</p>
                                 </div>
@@ -97,17 +105,19 @@
                         </div>
                     </div>
 
+
+                    <!-- Media designs -->
                     <div class="grid grid-cols-2 gap-6 lg:grid-cols-3 mt-20">
-                        <div v-for="project in projects.slice(2, 5)" :key="project.id" class="bg-cardBg hover:scale-[0.98] transition-transform duration-500">
-                            <a :href="project.link" target="_blank" class="group">
-                                <div class="w-full overflow-hidden">
+                        <div v-for="project in projects.slice(3, 6)" :key="project.id" class="flex flex-col overflow-hidden bg-cardBg hover:scale-[0.98] transition-transform duration-500">
+                            <a :href="project.link" target="_blank" class="group flex min-h-0 flex-1 flex-col">
+                                <div class="flex w-full max-h-96 shrink-0 items-center justify-center overflow-hidden bg-accentLight">
                                     <img
                                         :src="project.image"
                                         :alt="project.title"
-                                        class="h-full w-full object-cover"
+                                        class="max-h-96 w-full object-contain"
                                     />
                                 </div>
-                                <div class="flex items-center justify-between gap-4 border-t border-borderLight px-4 py-3">
+                                <div class="mt-auto flex items-center justify-between gap-4 border-t border-borderLight px-4 py-3">
                                     <p class="font-medium text-primaryText truncate">{{ project.title }}</p>
                                     <p class="text-sm text-secondaryText text-wrap">{{ project.description }}</p>
                                 </div>

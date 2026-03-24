@@ -19,6 +19,7 @@
         {id: 12, src: '/images/photos/photo12.jpg'},
         {id: 13, src: '/images/photos/photo13.jpg'},
         {id: 14, src: '/images/photos/photo14.jpg'},
+        {id: 15, src: '/images/photos/photo15.png'},
     ]
 
 </script>
@@ -26,7 +27,7 @@
 
 <template>
     <section 
-        class="fixed inset-0 z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto "
+        class="fixed inset-0 z-40 overflow-y-auto bg-background transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
         :class="active
             ? 'translate-y-0'
             : 'translate-y-full'"

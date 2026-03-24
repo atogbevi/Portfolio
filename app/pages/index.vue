@@ -12,21 +12,21 @@ const services = [
   {
     id: 1,
     title: 'Web Development',
-    description: 'We build web applications using the latest technologies.',
+    description: 'Création de sites web et d’applications modernes, rapides et sur mesure.',
     icon: 'mdi:code',
     component: WebServices,
   },
   {
     id: 2,
     title: 'Graphic Design',
-    description: 'We design visual identities and branding materials.',
+    description: 'Nous concevons des identités visuelles et des supports de marque.',
     icon: 'mdi:palette',
     component: DesignServices,
   },
   {
     id: 3,
     title: 'Photography',
-    description: 'We capture moments and create visual stories.',
+    description: 'Nous capturons des instants et créons des histoires visuelles.',
     icon: 'mdi:camera',
     component: PhotoServices,
   },
@@ -37,6 +37,8 @@ const services = [
 ====================== */
 const activeService = ref<number | null>(null)
 const serviceOpen = ref(false)
+
+const headerSurface = useHeaderSurface()
 
 /* ======================
    ACTIONS
@@ -73,6 +75,18 @@ const currentServiceComponent = computed(() => {
 watch(serviceOpen, (val) => {
   document.body.style.overflow = val ? 'hidden' : 'auto'
 })
+
+function syncHeaderSurface() {
+  if (!serviceOpen.value || activeService.value === null) {
+    headerSurface.value = 'default'
+    return
+  }
+  if (activeService.value === 1) headerSurface.value = 'web'
+  else if (activeService.value === 2) headerSurface.value = 'design'
+  else if (activeService.value === 3) headerSurface.value = 'photo'
+}
+
+watch([serviceOpen, activeService], syncHeaderSurface, { immediate: true })
 </script>
 
 <template>

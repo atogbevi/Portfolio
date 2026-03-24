@@ -19,18 +19,18 @@
             <div class="flex flex-col gap-4 lg:flex-1">
                 <div class="flex w-fit gap-2 items-center p-2 rounded-lg border border-secondaryText">
                     <div class="relative inline-flex h-2 w-2 rounded-full bg-secondaryText animate-pulse" />
-                    <p class="text-sm text-secondaryText">AVAILABLE FOR COMMISIONS</p>
+                    <p class="text-sm text-secondaryText">DISPONIBLE POUR DES COLABORATIONS</p>
                 </div>
                 <div class="flex flex-col gap-8">
                     <h1 class="text-5xl lg:text-6xl">
                         <span class="font-['Newsreader'] font-extralight text-primaryText">
-                            Digital craftsmanship
+                            Artisanat digital
                         </span> <br />
                         <span class="italic  text-secondaryText">
-                            driven by intention
+                            pensé avec intention
                         </span>
                     </h1>
-                    <p class="text-secondaryText text-xl max-w-lg lg:text-2xl">Alva Studio is a multidisciplinary practice merging logic and emotion. We build digital products, capture moments, and design visual identities.</p>
+                    <p class="text-secondaryText text-xl max-w-lg lg:text-2xl">Alva Studio est une agence multidisciplinaire qui allie logique et émotion. Nous créons des produits numériques, capturons des instants et concevons des identités visuelles.</p>
                 </div>
 
             </div>
@@ -39,7 +39,7 @@
                 <div class="h-96 w-full bg-secondaryText rounded-lg "/>
                 <a href="#services" class="flex gap-4 items-center w-fit cursor-pointer hover:opacity-80 transition-opacity">
                     <Icon icon="mdi:mouse-variant" class="text-secondaryText size-8 animate-bounce" />
-                    <span class="text-secondaryText text-sm">EXPLORE SERVICES</span>
+                <span class="text-secondaryText text-sm">EXPLOREZ LES SERVICES</span>
                 </a>
             </div>
 

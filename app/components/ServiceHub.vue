@@ -11,6 +11,7 @@ defineEmits(['open'])
 
 <template>
   <section
+    id="services"
     class="w-full py-8 px-6 lg:py-12 lg:px-16 transition-all duration-700
            ease-[cubic-bezier(0.16,1,0.3,1)]"
     :class="inactive
