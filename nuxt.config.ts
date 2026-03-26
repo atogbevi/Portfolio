@@ -10,4 +10,8 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  ssr: true,
+  app: {
+    baseURL: '/Portfolio/',
+  }
 })

@@ -93,8 +93,8 @@ const socials = [
         <p class="text-sm text-secondaryText">
           © {{ new Date().getFullYear() }} Alva Studio. Independent.
         </p>
-        <p class="text-sm text-secondaryText">
-          Made with Love <Icon icon="mdi:heart-outline" /> and Precision.
+        <p class="text-sm text-secondaryText inline-flex ite">
+          Made with Love and Precision.
         </p>
       </div>
     </div>
