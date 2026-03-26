@@ -1,9 +1,16 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const surface = useHeaderSurface()
+const showFooter = computed(() => surface.value === 'default')
+</script>
+
 <template>
-    <main>
+    <main class="bg-background">
         <Header />
-        <div class="min-h-screen pt-16">
+        <div class="min-h-screen bg-background pt-16">
             <NuxtPage />
         </div>
-        <Footer />
+        <Footer v-if="showFooter" />
     </main>
 </template>

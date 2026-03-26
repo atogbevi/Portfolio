@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed, watch } from 'vue'
 
 import WebServices from '~/components/WebServices.vue'
 import DesignServices from '~/components/DesignServices.vue'
@@ -11,23 +11,26 @@ import PhotoServices from '~/components/PhotoServices.vue'
 const services = [
   {
     id: 1,
-    title: 'Web Development',
+    title: 'Développeur Web',
     description: 'Création de sites web et d’applications modernes, rapides et sur mesure.',
     icon: 'mdi:code',
+    cover: '/images/cover1.jpg',
     component: WebServices,
   },
   {
     id: 2,
-    title: 'Graphic Design',
+    title: 'Design Graphique',
     description: 'Nous concevons des identités visuelles et des supports de marque.',
     icon: 'mdi:palette',
+    cover: '/images/cover2.jpg',
     component: DesignServices,
   },
   {
     id: 3,
-    title: 'Photography',
+    title: 'Photographie',
     description: 'Nous capturons des instants et créons des histoires visuelles.',
     icon: 'mdi:camera',
+    cover: '/images/cover3.jpg',
     component: PhotoServices,
   },
 ]
@@ -35,31 +38,9 @@ const services = [
 /* ======================
    STATE
 ====================== */
-const activeService = ref<number | null>(null)
-const serviceOpen = ref(false)
+const { activeService, serviceOpen, openService, closeService } = useServicePanel()
 
 const headerSurface = useHeaderSurface()
-
-/* ======================
-   ACTIONS
-====================== */
-const openService = (id: number) => {
-  activeService.value = id
-
-  // allow component to mount before animation
-  requestAnimationFrame(() => {
-    serviceOpen.value = true
-  })
-}
-
-const closeService = () => {
-  serviceOpen.value = false
-
-  // wait for closing animation before unmount
-  setTimeout(() => {
-    activeService.value = null
-  }, 700)
-}
 
 /* ======================
    COMPUTED

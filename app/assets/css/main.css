@@ -32,6 +32,11 @@ q {
   --accentMedium: #a1a1aa;         /* éléments secondaires neutres */
 }
 
+html,
+body {
+  background-color: var(--background);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;

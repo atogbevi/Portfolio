@@ -30,13 +30,20 @@
                             pensé avec intention
                         </span>
                     </h1>
-                    <p class="text-secondaryText text-xl max-w-lg lg:text-2xl">Alva Studio est une agence multidisciplinaire qui allie logique et émotion. Nous créons des produits numériques, capturons des instants et concevons des identités visuelles.</p>
+                    <p class="text-secondaryText text-xl max-w-lg lg:text-xl">
+                        Entre code et création. <br/>
+                        Je suis Angelica Togbevi, développeuse et créative. J’explore la rencontre entre design, code et image pour créer des expériences digitales sensibles et efficaces.<br/>
+                        <span class="font-bold">ALVA STUDIO</span> est mon espace de création.
+                        Un studio personnel où chaque projet est pensé avec intention, à la recherche d’un équilibre entre esthétique, performance et sens.
+                    </p>
                 </div>
 
             </div>
 
             <div class="flex flex-col gap-4 lg:flex-1">
-                <div class="h-96 w-full bg-secondaryText rounded-lg "/>
+                <div class="h-[500px] w-full bg-secondaryText rounded-lg ">
+                    <img src="/images/photo.png" alt="Angelica Togbevi" class="w-full h-full object-cover object-top rounded-lg" />
+                </div>
                 <a href="#services" class="flex gap-4 items-center w-fit cursor-pointer hover:opacity-80 transition-opacity">
                     <Icon icon="mdi:mouse-variant" class="text-secondaryText size-8 animate-bounce" />
                 <span class="text-secondaryText text-sm">EXPLOREZ LES SERVICES</span>

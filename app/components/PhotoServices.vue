@@ -18,8 +18,6 @@
         {id: 11, src: '/images/photos/photo11.jpg'},
         {id: 12, src: '/images/photos/photo12.jpg'},
         {id: 13, src: '/images/photos/photo13.jpg'},
-        {id: 14, src: '/images/photos/photo14.jpg'},
-        {id: 15, src: '/images/photos/photo15.png'},
     ]
 
 </script>
@@ -33,23 +31,23 @@
             : 'translate-y-full'"
         >
 
-        <div class="fixed inset-0 flex flex-col py-32">
+        <div class="fixed inset-0 flex flex-col px-8 py-32 lg:px-0">
             <button @click="$emit('close')" class="absolute top-20 right-6 text-primaryText text-xl hover:text-secondaryText transition-all duration-300 ease-linear">
                 <Icon icon="mdi:close" class="size-8" />
             </button>
 
             <!-- Text -->
-            <div class="flex flex-col gap-4 w-1/2 mx-auto items-center">
+            <div class="flex flex-col gap-4 w-full mx-auto items-center lg:w-1/2 ">
                 <Icon icon="mdi-light:camera" class="size-10 text-secondaryText" />
-                <h3 class="text-2xl text-primaryText md:text-3xl lg:text-4xl">Stilled Life</h3>
-                <p class="text-secondaryText text-center text-base md:text-lg lg:text-xl">
-                    Observing the quiet moments in a loud world. My photography focuses on architecture, texture, and natural light, aiming to extract the essence of a subject without artifice.
+                <h3 class="text-2xl text-primaryText md:text-3xl lg:text-4xl">Styliser la vie</h3>
+                <p class="text-secondaryText text-center text-xl">
+                    Observer les moments de calme dans un monde bruyant. Ma photographie se concentre sur l'architecture, les textures et la lumière naturelle, cherchant à extraire l'essence d'un sujet sans artifice.
                 </p>
 
             </div>
             
             <!-- Masonry container -->
-            <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 w-4/5 mx-auto pt-32">
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 mx-auto pt-32 lg:w-4/5">
                 <!-- Image item -->
                 <div
                     v-for="image in images"

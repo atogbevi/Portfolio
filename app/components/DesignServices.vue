@@ -34,21 +34,21 @@
             title: 'KIZO',
             description: 'Media Post',
             image: '/images/designs/dsg1.jpg',
-            link: 'https://www.google.com',
+            link: 'https://www.linkedin.com/feed/update/urn:li:activity:7399882110821519360',
         },
         {
             id: 5,
             title: 'Bot-Coin',
             description: 'Sticker Design',
             image: '/images/designs/dsg2.jpg',
-            link: 'https://www.google.com',
+            // link: '',
         },
         {
             id: 6,
-            title: 'Project 5',
-            description: 'Project 5 description',
-            image: '/images/designs/dsg1.jpg',
-            link: 'https://www.google.com',
+            title: 'Shoppy',
+            description: 'Visuel publicitaire',
+            image: '/images/designs/dsg3.jpg',
+            link: 'https://canva.link/rqkg00l84p5tr9a',
         },
     ]
 </script>
@@ -66,16 +66,16 @@
             </button>
             <div class="w-full px-6 lg:w-3/5 mx-auto lg:px-0">
 
-                <div class="flex flex-col gap-12 md:flex-row md:items-end md:gap-32">
-                    <div class="flex-1 flex flex-col gap-8">
+                <div class="flex flex-col gap-12 lg:flex-row lg:items-end lg:gap-32">
+                    <div class="flex flex-col gap-8 lg:flex-1">
                         <p class="text-xs text-secondaryText">02 / GRAPHIC DESIGN</p>
-                        <h3 class="text-6xl italic text-primaryText md:text-7xl lg:text-8xl">Forms & <br/>Types</h3>
+                        <h3 class="text-6xl italic text-primaryText md:text-7xl lg:text-[90px]">Formes & <br/>Typos</h3>
                     </div>
-                    <div class="flex-1">
+                    <div class="lg:flex-1">
                         <p class="text-secondaryText text-xl">
-                            Design is not just decoration; it is visual thinking. My work focuses on typography,
-                            grid systems, and negative space to create brand identities that feel timeless 
-                            yet distinctly modern
+                            Le design n'est pas qu'une simple décoration ; c'est une pensée visuelle.<br/>
+                            Je crée des identités visuelles qui ne se contentent pas d’être belles, mais qui traduisent une intention claire.
+                            Typographie, composition, rythme : chaque élément a un rôle précis.
                         </p>
                     </div>
                 </div>
@@ -110,11 +110,11 @@
                     <div class="grid grid-cols-2 gap-6 lg:grid-cols-3 mt-20">
                         <div v-for="project in projects.slice(3, 6)" :key="project.id" class="flex flex-col overflow-hidden bg-cardBg hover:scale-[0.98] transition-transform duration-500">
                             <a :href="project.link" target="_blank" class="group flex min-h-0 flex-1 flex-col">
-                                <div class="flex w-full max-h-96 shrink-0 items-center justify-center overflow-hidden bg-accentLight">
+                                <div class="flex w-full h-72 shrink-0 items-center justify-center overflow-hidden bg-accentLight">
                                     <img
                                         :src="project.image"
                                         :alt="project.title"
-                                        class="max-h-96 w-full object-contain"
+                                        class="h-full w-full object-cover"
                                     />
                                 </div>
                                 <div class="mt-auto flex items-center justify-between gap-4 border-t border-borderLight px-4 py-3">
@@ -129,11 +129,11 @@
                     <div class="mt-8 flex overflow-hidden bg-primaryText">
                         <div class="w-1 shrink-0 bg-stone-400/60" aria-hidden="true" />
                         <div class="flex flex-1 flex-col items-center justify-center px-12 py-20 text-center md:py-28">
-                            <p class="text-4xl font-light leading-tight text-white md:text-5xl lg:text-6xl">
-                                Less is only more<br />when done right.
-                            </p>
+                            <blockquote class="text-4xl font-light italic leading-tight text-white md:text-5xl lg:text-6xl">
+                                "Less is only more<br />when done right."
+                            </blockquote>
                             <p class="mt-8 text-sm font-medium uppercase tracking-[0.3em] text-white/90">
-                                Poster Series 2023
+                                Frank Chimero
                             </p>
                         </div>
                     </div>

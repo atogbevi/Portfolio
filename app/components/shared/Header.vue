@@ -41,8 +41,7 @@
           </a>
         </li>
         <li>
-          <a
-            href="#"
+          <NuxtLink to="/contact"
             class="group flex items-center gap-2 transition-colors"
             :class="linkHoverClass"
           >
@@ -52,7 +51,7 @@
               Entrer en contact
             </span>
             <Icon icon="mdi-light:email" class="size-6 shrink-0" :class="iconClass" />
-          </a>
+          </NuxtLink>
         </li>
       </ul>
     </nav>
