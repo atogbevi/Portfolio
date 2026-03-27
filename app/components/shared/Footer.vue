@@ -16,7 +16,7 @@ async function goToService(id: number) {
 const socials = [
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/company/alva-studio/',
+    url: 'https://www.linkedin.com/in/angelica-togbevi-042824268/',
   },
   {
     name: 'Instagram',

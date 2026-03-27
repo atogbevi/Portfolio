@@ -81,8 +81,11 @@
                 </div>
 
                 <!-- Projects -->
-                <!-- Web designs -->
+                
                 <div class="mt-40">
+
+                    <!-- Web designs -->
+
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
                         <div
                             v-for="project in projects.slice(0, 3)"
@@ -107,7 +110,8 @@
 
 
                     <!-- Media designs -->
-                    <div class="grid grid-cols-2 gap-6 lg:grid-cols-3 mt-20">
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-3 mt-20">
                         <div v-for="project in projects.slice(3, 6)" :key="project.id" class="flex flex-col overflow-hidden bg-cardBg hover:scale-[0.98] transition-transform duration-500">
                             <a :href="project.link" target="_blank" class="group flex min-h-0 flex-1 flex-col">
                                 <div class="flex w-full h-72 shrink-0 items-center justify-center overflow-hidden bg-accentLight">
