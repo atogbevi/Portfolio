@@ -1,0 +1,135 @@
+# Déploiement du site Nuxt sur GitHub Pages (branche main, déclenchement manuel possible).
+name: Deploy Nuxt to GitHub Pages
+
+on:
+  # Push sur main : build + déploiement automatique
+  push:
+    branches:
+      - main
+  # Bouton "Run workflow" dans l’onglet Actions
+  workflow_dispatch:
+
+# Un seul déploiement à la fois ; n’annule pas un déploiement déjà en cours
+concurrency:
+  group: github-pages-deployment
+  cancel-in-progress: false
+
+# Lecture du repo ; écriture Pages + jeton OIDC pour actions/deploy-pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '8'
+  CI: true
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy to Pages
+    runs-on: ubuntu-latest
+    # Lie le job à l’environnement GitHub Pages (URL publiée après déploiement)
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Clone du dépôt (historique réduit pour accélérer)
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # Installe la CLI pnpm (sans installer les deps tout de suite)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      # Chemin du store pnpm : utilisé par le cache ci-dessous
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      # Node.js + cache des dépendances pnpm (basé sur pnpm-lock.yaml)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      # Cache additionnel du store global pnpm (accélère les installs)
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # Installation stricte selon le lockfile (reproductible en CI)
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Build Nuxt → sortie dans .output/public ; prerender activé pour le statique
+      - name: Build Nuxt application
+        id: build
+        run: pnpm build
+        timeout-minutes: 15
+        env:
+          NITRO_PRERENDER: 'true'
+
+      # Vérifie que le dossier attendu et index.html existent avant upload
+      - name: Verify build output
+        run: |
+          if [ ! -d ".output/public" ]; then
+            echo "::error::Build output directory '.output/public' not found"
+            exit 1
+          fi
+          if [ ! -f ".output/public/index.html" ]; then
+            echo "::error::index.html not found in build output"
+            exit 1
+          fi
+          ls -lah .output/public/
+          du -sh .output/public/
+
+      # Empaquète le site statique pour l’action de déploiement GitHub Pages
+      - name: Upload Pages artifact
+        id: upload-artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./.output/public
+        timeout-minutes: 10
+
+      # Publie l’artefact sur GitHub Pages (nécessite Pages activé + source "GitHub Actions")
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        timeout-minutes: 10
+
+  # Job secondaire : uniquement si build-and-deploy a échoué (lien vers les logs)
+  notify-failure:
+    name: Notify on failure
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: failure()
+    steps:
+      - name: Failure summary
+        run: |
+          echo "::error::Deployment failed — see build-and-deploy job logs."
+          echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+  # Job secondaire : uniquement si tout a réussi (rappel de l’URL du site)
+  notify-success:
+    name: Notify on success
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: success()
+    steps:
+      - name: Success summary
+        run: |
+          echo "Deployed: https://${{ github.repository_owner }}.github.io/Portfolio/"
