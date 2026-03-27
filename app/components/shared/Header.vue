@@ -26,6 +26,19 @@
   const iconClass = computed(() =>
     surface.value === 'web' ? 'text-white' : 'text-primaryText',
   );
+
+  const cvButtonClass = computed(() => {
+    switch (surface.value) {
+      case 'web':
+        return 'rounded-full border border-white/45 bg-white/10 px-5 py-2 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/15';
+      case 'design':
+        return 'rounded-full border border-stone-400/55 bg-stone-900/8 px-5 py-2 text-sm font-bold uppercase tracking-wide text-primaryText transition-colors hover:bg-stone-900/12';
+      case 'photo':
+      case 'default':
+      default:
+        return 'rounded-full border border-stone-400/50 bg-stone-900/6 px-5 py-2 text-sm font-bold uppercase tracking-wide text-primaryText transition-colors hover:bg-stone-900/10';
+    }
+  });
 </script>
 
 <template>
@@ -40,7 +53,21 @@
             ALVA STUDIO
           </a>
         </li>
-        <li>
+        <li class="flex items-center gap-6 lg:gap-8">
+          <a
+            href="/cv_fr.pdf"
+            download="CV_FR_ANGELICA_TOGBEVI.pdf"
+            class="group flex items-center gap-2 transition-colors"
+            :class="linkHoverClass"
+            aria-label="Télécharger le CV (PDF)"
+          >
+            <span
+              class="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-700 group-hover:max-w-[200px] group-hover:opacity-100"
+            >
+              Télécharger mon cv
+            </span>
+            <Icon icon="mdi-light:download" class="size-6 shrink-0" :class="iconClass" />
+          </a>
           <NuxtLink to="/contact"
             class="group flex items-center gap-2 transition-colors"
             :class="linkHoverClass"
