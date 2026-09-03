@@ -10,6 +10,8 @@
         return 'bg-stone-900 text-white';
       case 'design':
         return 'bg-stone-200 text-primaryText';
+      case 'data':
+        return 'bg-stone-900 text-white';
       case 'photo':
       case 'default':
       default:

@@ -2,6 +2,7 @@
 import { computed, watch } from 'vue'
 
 import WebServices from '~/components/WebServices.vue'
+import DataServices from '~/components/DataServices.vue'
 import DesignServices from '~/components/DesignServices.vue'
 import PhotoServices from '~/components/PhotoServices.vue'
 
@@ -11,7 +12,7 @@ import PhotoServices from '~/components/PhotoServices.vue'
 const services = [
   {
     id: 1,
-    title: 'Développeur Web',
+    title: 'Développement Web',
     description: 'Création de sites web et d’applications modernes, rapides et sur mesure.',
     icon: 'mdi:code',
     cover: '/images/cover1.jpg',
@@ -27,6 +28,14 @@ const services = [
   },
   {
     id: 3,
+    title: 'Data Analyse',
+    description: 'Analyse de données et aide à la décision.',
+    icon: 'mdi:chart-box',
+    cover: '/images/cover1.jpg',
+    component: DataServices,
+  },
+  {
+    id: 4,
     title: 'Photographie',
     description: 'Nous capturons des instants et créons des histoires visuelles.',
     icon: 'mdi:camera',
@@ -64,7 +73,8 @@ function syncHeaderSurface() {
   }
   if (activeService.value === 1) headerSurface.value = 'web'
   else if (activeService.value === 2) headerSurface.value = 'design'
-  else if (activeService.value === 3) headerSurface.value = 'photo'
+  else if (activeService.value === 3) headerSurface.value = 'data'
+  else if (activeService.value === 4) headerSurface.value = 'photo'
 }
 
 watch([serviceOpen, activeService], syncHeaderSurface, { immediate: true })
