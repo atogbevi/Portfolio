@@ -31,7 +31,7 @@ const services = [
     title: 'Data Analyse',
     description: 'Analyse de données et aide à la décision.',
     icon: 'mdi:chart-box',
-    cover: '/images/cover1.jpg',
+    cover: '/images/cover4.jpg',
     component: DataServices,
   },
   {
