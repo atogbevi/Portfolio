@@ -1,88 +1,53 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
-  import { Icon } from '@iconify/vue';
+import { computed } from 'vue';
+import { Icon } from '@iconify/vue';
 
-  const surface = useHeaderSurface();
+const surface = useHeaderSurface();
 
-  const headerClass = computed(() => {
-    switch (surface.value) {
-      case 'web':
-        return 'bg-stone-900 text-white';
-      case 'design':
-        return 'bg-stone-200 text-primaryText';
-      case 'data':
-        return 'bg-stone-900 text-white';
-      case 'photo':
-      case 'default':
-      default:
-        return 'bg-background text-primaryText';
-    }
-  });
+const isDark = computed(() => surface.value === 'web' || surface.value === 'data')
 
-  const linkHoverClass = computed(() =>
-    surface.value === 'web'
-      ? 'hover:text-stone-300'
-      : 'hover:text-secondaryText',
-  );
+const barClass = computed(() => {
+  if (isDark.value) {
+    return 'border-white/10 bg-stone-950 text-white shadow-[0_10px_40px_-12px_rgba(0,0,0,0.45)]'
+  }
+  if (surface.value === 'design') {
+    return 'border-stone-300/80 bg-white text-primaryText shadow-[0_10px_40px_-16px_rgba(24,24,27,0.18)]'
+  }
+  return 'border-black/[0.06] bg-white text-primaryText shadow-[0_10px_40px_-16px_rgba(24,24,27,0.18)]'
+})
 
-  const iconClass = computed(() =>
-    surface.value === 'web' ? 'text-white' : 'text-primaryText',
-  );
-
-  const cvButtonClass = computed(() => {
-    switch (surface.value) {
-      case 'web':
-        return 'rounded-full border border-white/45 bg-white/10 px-5 py-2 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/15';
-      case 'design':
-        return 'rounded-full border border-stone-400/55 bg-stone-900/8 px-5 py-2 text-sm font-bold uppercase tracking-wide text-primaryText transition-colors hover:bg-stone-900/12';
-      case 'photo':
-      case 'default':
-      default:
-        return 'rounded-full border border-stone-400/50 bg-stone-900/6 px-5 py-2 text-sm font-bold uppercase tracking-wide text-primaryText transition-colors hover:bg-stone-900/10';
-    }
-  });
+const contactButtonClass = computed(() =>
+  isDark.value
+    ? 'bg-white text-stone-950 hover:bg-stone-200'
+    : 'bg-stone-950 text-white hover:bg-stone-800',
+)
 </script>
 
 <template>
-  <header
-    class="fixed left-0 right-0 top-0 z-50 px-6 py-4 transition-colors duration-300 ease-out lg:px-10"
-    :class="headerClass"
-  >
-    <nav>
-      <ul class="flex items-center justify-between">
-        <li>
-          <a href="/" class="font-bold transition-colors" :class="linkHoverClass">
-            ALVA STUDIO
-          </a>
-        </li>
-        <li class="flex items-center gap-6 lg:gap-8">
-          <a
-            href="/cv_fr.pdf"
-            download="CV_FR_ANGELICA_TOGBEVI.pdf"
-            class="group flex items-center gap-2 transition-colors"
-            :class="linkHoverClass"
-            aria-label="Télécharger le CV (PDF)"
-          >
-            <span
-              class="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-700 group-hover:max-w-[200px] group-hover:opacity-100"
-            >
-              Télécharger mon cv
-            </span>
-            <Icon icon="mdi-light:download" class="size-6 shrink-0" :class="iconClass" />
-          </a>
-          <NuxtLink to="/contact"
-            class="group flex items-center gap-2 transition-colors"
-            :class="linkHoverClass"
-          >
-            <span
-              class="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-700 group-hover:max-w-[200px] group-hover:opacity-100"
-            >
-              Entrer en contact
-            </span>
-            <Icon icon="mdi-light:email" class="size-6 shrink-0" :class="iconClass" />
-          </NuxtLink>
-        </li>
-      </ul>
+  <header class="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 lg:px-0 lg:w-4/5 lg:mx-auto">
+    <nav
+      class="pointer-events-auto flex items-center justify-between gap-4 rounded-full border py-2 pl-2.5 pr-2.5 transition-colors duration-300 ease-out sm:pl-3 sm:pr-3"
+      :class="barClass">
+      <NuxtLink to="/" class="group flex items-center rounded-full" aria-label="Alva Studio">
+        <img src="/images/logo.png" alt="" class="size-9 shrink-0 rounded-full object-cover" />
+        <span
+          class="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium opacity-0 transition-all duration-500 ease-out group-hover:max-w-40 group-hover:pl-2.5 group-hover:opacity-100 group-focus-visible:max-w-40 group-focus-visible:pl-2.5 group-focus-visible:opacity-100">
+          alva.studio
+        </span>
+      </NuxtLink>
+
+      <div class="flex items-center gap-3 sm:gap-4">
+        <a href="/cv_fr.pdf" download="CV_FR_ANGELICA_TOGBEVI.pdf"
+          class="px-1 text-sm font-medium transition-opacity hover:opacity-70" aria-label="Télécharger le CV (PDF)">
+          CV
+        </a>
+        <NuxtLink to="/contact"
+          class="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors"
+          :class="contactButtonClass">
+          Me contacter
+          <Icon icon="mdi:arrow-right" class="size-4" />
+        </NuxtLink>
+      </div>
     </nav>
   </header>
 </template>

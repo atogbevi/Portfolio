@@ -11,6 +11,8 @@ export default {
         overlayText: 'var(--overlayText)',
         accentLight: 'var(--accentLight)',
         accentMedium: 'var(--accentMedium)',
+        accentLightBlue: 'var(--accentLightBlue)',
+        accentDarkBlue: 'var(--accentDarkBlue)',
       },
       boxShadow: {
         hover: '0 4px 6px -1px var(--hoverShadow), 0 2px 4px -2px var(--hoverShadow)',

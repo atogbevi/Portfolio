@@ -29,7 +29,9 @@ q {
   --overlayDark: #18181b;          /* overlays sombres (bg-stone-900) */
   --overlayText: #e4e4e7;          /* texte clair sur overlay (text-stone-200) */
   --accentLight: #f5f5f4;          /* décorations claires */
-  --accentMedium: #a1a1aa;         /* éléments secondaires neutres */
+  --accentMedium: #a1a1aa;          /* éléments secondaires neutres */
+  --accentLightBlue: #36F8EB;
+  --accentDarkBlue: #20928B;        
 }
 
 html,
