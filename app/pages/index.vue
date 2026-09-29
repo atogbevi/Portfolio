@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 
 import WebServices from '~/components/WebServices.vue'
+import DataServices from '~/components/DataServices.vue'
 import DesignServices from '~/components/DesignServices.vue'
 import PhotoServices from '~/components/PhotoServices.vue'
 
@@ -11,7 +12,7 @@ import PhotoServices from '~/components/PhotoServices.vue'
 const services = [
   {
     id: 1,
-    title: 'Développeur Web',
+    title: 'Développement Web',
     description: 'Création de sites web et d’applications modernes, rapides et sur mesure.',
     icon: 'mdi:code',
     cover: '/images/cover1.jpg',
@@ -27,12 +28,21 @@ const services = [
   },
   {
     id: 3,
-    title: 'Photographie',
-    description: 'Nous capturons des instants et créons des histoires visuelles.',
-    icon: 'mdi:camera',
-    cover: '/images/cover3.jpg',
-    component: PhotoServices,
+    title: 'Data Analyse',
+    description: 'Analyse de données et aide à la décision.',
+    icon: 'mdi:chart-box',
+    cover: '/images/cover4.jpg',
+    component: DataServices,
   },
+  // Service de photographie désactivé pour le moment
+  // {
+  //   id: 4,
+  //   title: 'Photographie',
+  //   description: 'Nous capturons des instants et créons des histoires visuelles.',
+  //   icon: 'mdi:camera',
+  //   cover: '/images/cover3.jpg',
+  //   component: PhotoServices,
+  // },
 ]
 
 /* ======================
@@ -53,9 +63,25 @@ const currentServiceComponent = computed(() => {
 /* ======================
    SIDE EFFECTS
 ====================== */
-watch(serviceOpen, (val) => {
-  document.body.style.overflow = val ? 'hidden' : 'auto'
+watch(serviceOpen, async (open) => {
+  if (!import.meta.client) return
+  document.body.style.overflow = open ? 'hidden' : ''
+  if (!open) return
+  await nextTick()
+  const dialog = document.querySelector<HTMLElement>('[role="dialog"]')
+  const close = dialog?.querySelector<HTMLElement>('[data-panel-close]')
+  ;(close ?? dialog)?.focus()
 })
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key !== 'Escape' || !serviceOpen.value) return
+  if (event.defaultPrevented || document.querySelector('dialog[open]')) return
+  event.preventDefault()
+  closeService()
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 function syncHeaderSurface() {
   if (!serviceOpen.value || activeService.value === null) {
@@ -64,7 +90,8 @@ function syncHeaderSurface() {
   }
   if (activeService.value === 1) headerSurface.value = 'web'
   else if (activeService.value === 2) headerSurface.value = 'design'
-  else if (activeService.value === 3) headerSurface.value = 'photo'
+  else if (activeService.value === 3) headerSurface.value = 'data'
+  else if (activeService.value === 4) headerSurface.value = 'photo'
 }
 
 watch([serviceOpen, activeService], syncHeaderSurface, { immediate: true })
@@ -73,15 +100,14 @@ watch([serviceOpen, activeService], syncHeaderSurface, { immediate: true })
 <template>
   <div class="bg-background">
 
-    <!-- HERO -->
-    <HeroSection :inactive="serviceOpen" />
-
-    <!-- SERVICES HUB -->
-    <ServiceHub
-      :services="services"
-      :inactive="serviceOpen"
-      @open="openService"
-    />
+    <div :inert="serviceOpen ? true : undefined">
+      <HeroSection :inactive="serviceOpen" />
+      <ServiceHub
+        :services="services"
+        :inactive="serviceOpen"
+        @open="openService"
+      />
+    </div>
 
     <!-- ACTIVE SERVICE -->
     <component

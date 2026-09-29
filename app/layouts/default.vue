@@ -8,7 +8,7 @@ const showFooter = computed(() => surface.value === 'default')
 <template>
     <main class="bg-background">
         <Header />
-        <div class="min-h-screen bg-background pt-16">
+        <div class="min-h-screen bg-background pt-20">
             <NuxtPage />
         </div>
         <Footer v-if="showFooter" />

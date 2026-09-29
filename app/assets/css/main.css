@@ -25,11 +25,18 @@ q {
   --background: #fafafa;           /* fond général (bg-stone-50) */
   --cardBg: #ffffff;               /* fond des cartes (bg-white) */
   --borderLight: #e5e5e5;          /* bordures fines (border-stone-200) */
-  --hoverShadow: rgba(229, 229, 229, 0.5);  /* hover:shadow-stone-200/50 */
   --overlayDark: #18181b;          /* overlays sombres (bg-stone-900) */
   --overlayText: #e4e4e7;          /* texte clair sur overlay (text-stone-200) */
   --accentLight: #f5f5f4;          /* décorations claires */
-  --accentMedium: #a1a1aa;         /* éléments secondaires neutres */
+  --accentMedium: #a1a1aa;          /* éléments secondaires neutres */
+  --accentLightBlue: #36F8EB;
+  --accentDarkBlue: #20928B;
+  --surfaceDark: #0c0a09;
+  --inkOnDark: #fafafa;
+  --accentInk: #1a7771;            /* #36F8EB × 0.48, 5.13:1 sur #fafafa */
+  --borderStrong: #78716c;
+  --borderOnDark: #a8a29e;
+  --radius: 6px;
 }
 
 html,
@@ -40,6 +47,21 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
