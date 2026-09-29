@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: projects.map(project => `/projets/${project.slug}`),
+      routes: ['/', '/contact', ...projects.map(project => `/projets/${project.slug}`)],
     },
   },
 })

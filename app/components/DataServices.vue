@@ -46,6 +46,7 @@ const projects = [
         slug: 'economie-numerique-togo',
         name: "Diagnostic de l'accès aux télécommunications et aux services numériques",
         description: "Où l'accès aux services numériques manque-t-il au Togo ? Un diagnostic par préfecture et par canton, construit à partir de données ouvertes.",
+        summary: "Où l'accès aux services numériques manque-t-il au Togo ? Un diagnostic par préfecture et par canton, construit à partir de données ouvertes.",
         stack: ['Python', 'Streamlit'],
         cover: '/images/data_analysis/economie-numerique-tg/project4.png',
         link: 'https://togo-diagnostic-acces-numerique.streamlit.app/',
@@ -55,6 +56,7 @@ const projects = [
         slug: 'acces-electricite-togo',
         name: 'Électricité, énergie propre et forêts au Togo',
         description: "Le Togo veut électrifier ses campagnes d'ici 2030 sans épuiser ses forêts — un vrai casse-tête, puisque la plupart des ménages cuisinent encore au bois et au charbon. J'ai analysé six jeux de données publiques (accès à l'électricité, énergie des ménages, émissions polluantes, climat, forêts protégées) pour comprendre où se situent les vrais points de tension, et j'ai construit un outil interactif bilingue (français/anglais) pour explorer ces résultats. Une découverte marquante : ce n'est pas le secteur de l'énergie qui pollue le plus au Togo, mais l'agriculture et la déforestation — un constat qui change la façon de penser les priorités climatiques du pays.",
+        summary: "Le Togo veut électrifier ses campagnes d'ici 2030 sans épuiser ses forêts, puisque la plupart des ménages cuisinent au bois et au charbon.",
         stack: ['Python', 'Streamlit'],
         cover: '/images/data_analysis/project1.png',
         link: 'https://energie-transition-ecologique-togo.streamlit.app/',
@@ -65,6 +67,7 @@ const projects = [
         slug: 'acces-eau-potable-togo',
         name: "Accès à l'eau potable au Togo",
         description: "Combien de villages togolais manquent encore de points d'eau fiables, et où faut-il investir en priorité ? Pour répondre à cette question, j'ai croisé cinq sources de données publiques (infrastructures existantes, risques d'inondation, densité de population) afin de construire un outil interactif qui identifie, région par région, les zones les plus urgentes à équiper ou à entretenir. Le résultat : une carte claire des priorités d'investissement, utilisable par des décideurs pour orienter des financements vers les endroits qui en ont le plus besoin.",
+        summary: "Combien de villages togolais manquent encore de points d'eau fiables, et où faut-il investir en priorité ?",
         stack: ['Python', 'Streamlit'],
         cover: '/images/data_analysis/project2.png',
         link: 'https://acces-eau-tg.streamlit.app/',
@@ -74,6 +77,7 @@ const projects = [
         slug: 'health-map',
         name: 'HealthMap — Cartographie des acteurs et infrastructures de santé au Togo',
         description: "HealthMap est une plateforme web dédiée à l’exploration et à la visualisation des données liées au secteur de la santé au Togo. Le projet permet de rechercher et filtrer différentes entités du secteur, notamment les pharmacies, laboratoires, établissements et acteurs de la HealthTech, tout en explorant leurs informations et leur localisation. Une attention particulière a été portée à la collecte, au nettoyage et à la structuration des données. Plusieurs jeux de données géospatiales issus de GEODATA Togo ont été traités avec Python et Pandas avant d’être intégrés dans une base PostgreSQL via Supabase. La plateforme comprend également un dashboard permettant d’explorer la répartition des entités par catégorie et par zone géographique.",
+        summary: "Rechercher et filtrer pharmacies, laboratoires et acteurs de la HealthTech, et explorer leur répartition par zone.",
         stack: ['Nuxt', 'Tailwind', 'Supabase', 'Python', 'Chart.js'],
         cover: '/images/data_analysis/project3.png',
         link: 'https://health-map-tau.vercel.app/',
@@ -85,11 +89,19 @@ defineEmits(['close'])
 
 <template>
     <section
-        class="fixed inset-0 z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="data-panel-title"
+        class="fixed inset-0 z-40 overflow-y-auto transition-transform duration-[var(--panel-duration)] ease-[cubic-bezier(0.16,1,0.3,1)]"
         :class="active ? 'translate-y-0' : 'translate-y-full'">
-        <div class="fixed inset-0 bg-stone-900 text-stone-400 overflow-y-auto">
-            <button @click="$emit('close')"
-                class="absolute top-20 right-6 text-white hover:text-secondaryText transition-all duration-300 ease-linea">
+        <div class="fixed inset-0 overflow-y-auto bg-stone-900 text-inkOnDark">
+            <button
+                type="button"
+                data-panel-close
+                aria-label="Fermer"
+                class="absolute right-6 top-20 text-inkOnDark transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:underline"
+                @click="$emit('close')"
+            >
                 <Icon icon="mdi:close" class="size-8" />
             </button>
 
@@ -97,8 +109,8 @@ defineEmits(['close'])
                 <div class="flex flex-col gap-20 items-start lg:flex-row lg:items-center lg:gap-32 ">
                     <div class="flex flex-col gap-4">
                         <p class="text-xs">03 / DATA ANALYSIS</p>
-                        <p class="text-4xl text-accentLight font-light md:text-5xl">From data to <span
-                                class="text-secondaryText italic">insights</span></p>
+                        <p id="data-panel-title" class="text-4xl font-light text-accentLight md:text-5xl">From data to <span
+                                class="italic text-inkOnDark">insights</span></p>
                     </div>
 
                     <!-- Skills -->
@@ -110,9 +122,8 @@ defineEmits(['close'])
                         </p>
                         <div class="flex flex-wrap gap-4">
                             <div v-for="skill in skills" :key="skill.id"
-                                class="group flex flex-col items-center gap-2 transition-all duration-500 ease-linear hover:scale-110 hover:text-accentLight ">
-                                <Icon :icon="skill.icon"
-                                    class="text-2xl transition-all duration-500 ease-linear group-hover:rotate-12" />
+                                class="flex flex-col items-center gap-2">
+                                <Icon :icon="skill.icon" class="text-2xl" />
                                 <p class="text-xs">{{ skill.name }}</p>
                             </div>
                         </div>
@@ -125,12 +136,12 @@ defineEmits(['close'])
                     <ProjectCard
                         v-for="project in projects"
                         :key="project.id"
+                        tone="dark"
                         :title="project.name"
-                        :description="project.description"
+                        :summary="project.summary"
                         :cover="project.cover"
                         :stack="project.stack"
-                        :demo-url="caseStudyFor(project)?.links?.demo || project.link"
-                        :demo-label="caseStudyFor(project)?.links?.demo ? 'Voir la démo' : 'Voir le projet'"
+                        :demo-url="project.link || undefined"
                         :case-study-slug="caseStudyFor(project)?.slug"
                     />
                 </div>

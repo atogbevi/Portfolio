@@ -13,9 +13,14 @@ export default {
         accentMedium: 'var(--accentMedium)',
         accentLightBlue: 'var(--accentLightBlue)',
         accentDarkBlue: 'var(--accentDarkBlue)',
+        surfaceDark: 'var(--surfaceDark)',
+        inkOnDark: 'var(--inkOnDark)',
+        accentInk: 'var(--accentInk)',
+        borderStrong: 'var(--borderStrong)',
+        borderOnDark: 'var(--borderOnDark)',
       },
-      boxShadow: {
-        hover: '0 4px 6px -1px var(--hoverShadow), 0 2px 4px -2px var(--hoverShadow)',
+      borderRadius: {
+        radius: 'var(--radius)',
       },
     },
   },

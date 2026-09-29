@@ -22,20 +22,20 @@ onMounted(() => {
 
       <!-- Email -->
       <a
-        href="mailto:hello@alvastudio.com"
-        class="group flex items-center justify-between gap-6 border-t border-borderLight py-8 transition-colors hover:bg-stone-50/80"
+        href="mailto:atogbevi.wk@gmail.com"
+        class="flex items-center justify-between gap-6 border-t border-borderLight py-8 transition-colors hover:bg-stone-50/80"
       >
         <div class="min-w-0 flex-1">
-          <p class="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-secondaryText">
+          <p class="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-primaryText">
             Email
           </p>
-          <a href="mailto:atogbevi.wk@gmail.com" class="text-2xl font-extralight text-primaryText hover:text-secondaryText md:text-3xl lg:text-4xl">
+          <p class="text-2xl font-extralight text-primaryText md:text-3xl lg:text-4xl">
             atogbevi.wk@gmail.com
-          </a>
+          </p>
         </div>
         <Icon
           icon="mdi:arrow-top-right"
-          class="size-7 shrink-0 text-primaryText opacity-70 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
+          class="size-7 shrink-0 text-primaryText"
           aria-hidden="true"
         />
       </a>

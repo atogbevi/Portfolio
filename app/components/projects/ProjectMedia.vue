@@ -35,12 +35,12 @@ function markMissing() {
       :loading="eager ? 'eager' : 'lazy'"
       :fetchpriority="eager ? 'high' : undefined"
       decoding="async"
-      class="h-auto w-full rounded-lg border border-borderLight bg-cardBg object-contain"
+      class="h-auto w-full rounded-radius border border-borderStrong bg-cardBg object-contain"
       @error="markMissing"
     >
     <div
       v-else
-      class="aspect-[4/3] w-full rounded-lg border border-borderLight bg-cardBg"
+      class="aspect-[4/3] w-full rounded-radius border border-borderStrong bg-cardBg"
       role="img"
       :aria-label="alt"
     />

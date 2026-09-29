@@ -62,15 +62,15 @@ const nextProject = computed(() => {
 </script>
 
 <template>
-  <article v-if="project" class="project-detail bg-background text-primaryText">
+  <article v-if="project" class="project-detail overflow-x-clip bg-background text-primaryText">
     <ProjectHero :project="project" :actions="actions" />
 
-    <div class="mx-auto max-w-5xl px-6 pb-28 lg:px-10">
-      <section class="mt-28 max-w-3xl lg:mt-36">
-        <h2 class="font-['Newsreader'] text-3xl font-light text-primaryText md:text-4xl">
+    <div class="mx-auto max-w-5xl px-6 pb-16 lg:px-10">
+      <section class="mt-14 max-w-3xl lg:mt-16">
+        <h2 class="font-['Newsreader'] text-2xl font-light text-accentInk md:text-3xl">
           Contexte
         </h2>
-        <div class="mt-8 flex flex-col gap-6 text-base leading-relaxed text-primaryText md:text-lg">
+        <div class="mt-5 flex flex-col gap-4 text-base leading-relaxed text-primaryText">
           <p v-for="(paragraph, index) in project.context" :key="index">
             {{ paragraph }}
           </p>
@@ -87,44 +87,16 @@ const nextProject = computed(() => {
       />
       <ProjectGallery :images="project.gallery" />
 
-      <footer class="mt-28 border-t border-borderLight pt-16 lg:mt-36">
-        <ul v-if="actions.length" class="flex flex-col gap-4">
-          <li v-for="action in actions" :key="action.key">
-            <a
-              :href="action.href"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-base text-primaryText transition-colors hover:text-secondaryText motion-reduce:transition-none"
-            >
-              {{ action.label }}
-            </a>
-          </li>
-        </ul>
-
-        <p class="mt-12 text-xs font-medium uppercase tracking-[0.2em] text-secondaryText">
-          Stack
+      <footer v-if="nextProject" class="mt-14 border-t border-borderStrong pt-8 lg:mt-16">
+        <p class="text-xs font-medium uppercase tracking-[0.16em] text-accentInk">
+          Projet suivant
         </p>
-        <ul class="mt-4 flex flex-wrap gap-2">
-          <li
-            v-for="item in project.stack"
-            :key="item"
-            class="rounded-full border border-borderLight px-3 py-1 text-xs text-secondaryText"
-          >
-            {{ item }}
-          </li>
-        </ul>
-
-        <div v-if="nextProject" class="mt-16">
-          <p class="text-xs font-medium uppercase tracking-[0.2em] text-secondaryText">
-            Projet suivant
-          </p>
-          <NuxtLink
-            :to="`/projets/${nextProject.slug}`"
-            class="mt-4 inline-block font-['Newsreader'] text-2xl font-light text-primaryText transition-colors hover:text-secondaryText motion-reduce:transition-none"
-          >
-            {{ nextProject.title }}
-          </NuxtLink>
-        </div>
+        <NuxtLink
+          :to="`/projets/${nextProject.slug}`"
+          class="mt-2 inline-block font-['Newsreader'] text-2xl font-light text-primaryText hover:underline"
+        >
+          {{ nextProject.title }}
+        </NuxtLink>
       </footer>
     </div>
   </article>
@@ -137,7 +109,7 @@ const nextProject = computed(() => {
       <h1 class="mt-6 font-['Newsreader'] text-4xl font-light leading-tight text-primaryText md:text-5xl">
         Projet introuvable
       </h1>
-      <p class="mt-6 max-w-xl text-lg leading-relaxed text-secondaryText">
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-primaryText">
         Cette adresse ne correspond à aucun projet.
       </p>
       <NuxtLink

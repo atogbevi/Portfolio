@@ -36,11 +36,6 @@
         name: 'VUE',
         icon: 'mdi:vuejs',
       },
-      {
-        id: 7,
-        name: 'FLUTTER',
-        icon: 'simple-icons:flutter',
-      }
       
     ]
 
@@ -49,6 +44,7 @@
           id: 1,
           name: 'HealthMap — Cartographie des acteurs et infrastructures de santé au Togo',
           description: "HealthMap est une plateforme web dédiée à l’exploration et à la visualisation des données liées au secteur de la santé au Togo. Le projet permet de rechercher et filtrer différentes entités du secteur, notamment les pharmacies, laboratoires, établissements et acteurs de la HealthTech, tout en explorant leurs informations et leur localisation. Une attention particulière a été portée à la collecte, au nettoyage et à la structuration des données. Plusieurs jeux de données géospatiales issus de GEODATA Togo ont été traités avec Python et Pandas avant d’être intégrés dans une base PostgreSQL via Supabase. La plateforme comprend également un dashboard permettant d’explorer la répartition des entités par catégorie et par zone géographique.",
+          summary: "Rechercher et filtrer pharmacies, laboratoires et acteurs de la HealthTech, et explorer leur répartition par zone.",
           stack: ['Nuxt', 'Tailwind', 'Supabase', 'Python', 'Chart.js'],
           cover: '/images/data_analysis/project3.png',
           link: 'https://health-map-tau.vercel.app/',
@@ -57,6 +53,7 @@
         id: 2,
         name: 'Sucu - Orientation universitaire intelligente',
         description: 'SUCU est une plateforme d’aide à l’orientation conçue pour accompagner les étudiants dans le choix de leur parcours académique. Le système s’appuie sur des modèles psychométriques (RIASEC, Big Five, aptitudes) combinés à un algorithme de recommandation basé sur la similarité vectorielle. L’objectif : proposer des orientations cohérentes avec le profil, les compétences et les aspirations de chaque utilisateur. Pensé comme une réponse aux limites des dispositifs d’orientation traditionnels en Afrique, SUCU introduit une approche plus objective, personnalisée et accessible.',
+        summary: "SUCU accompagne les étudiants dans le choix de leur parcours, avec des modèles psychométriques et un algorithme de recommandation.",
         stack: ['Nuxt', 'Tailwind', 'FastAPI', 'MongoDB','Python'],
         cover: '/images/websites/project1.jpg',
         link: 'https://web-sucu.vercel.app/',
@@ -66,6 +63,7 @@
         id: 3,
         name: 'Vemianou - Site vitrine associatif',
         description: 'Vémianou est une association et ce projet est un site vitrine développé pour valoriser les actions et les engagements de cette association. La plateforme permet de présenter les missions, publier des articles et mettre en avant les activités à travers une galerie d\'images. Les contenus dynamiques tels que les articles et les images sont entièrement administrable via un CMS, offrant à l’équipe une autonomie dans la gestion du site.',
+        summary: "Site vitrine pour présenter les missions, publier des articles et montrer les activités, avec des contenus administrables via un CMS.",
         stack: ['Nuxt', 'Tailwind', 'Strapi', 'EmailJS'],
         cover: '/images/websites/project2.jpg',
         link: 'https://vemianou-web.vercel.app/',
@@ -76,11 +74,20 @@
 </script>
 
 <template>
-  <section 
-    class="fixed inset-0 z-40 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto"
+  <section
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="web-panel-title"
+    class="fixed inset-0 z-40 overflow-y-auto transition-transform duration-[var(--panel-duration)] ease-[cubic-bezier(0.16,1,0.3,1)]"
     :class="active ? 'translate-y-0' : 'translate-y-full'">
-    <div class="fixed inset-0 bg-stone-900 text-stone-400 overflow-y-auto">
-      <button @click="$emit('close')" class="absolute top-20 right-6 text-white hover:text-secondaryText transition-all duration-300 ease-linea">
+    <div class="fixed inset-0 overflow-y-auto bg-stone-900 text-inkOnDark">
+      <button
+        type="button"
+        data-panel-close
+        aria-label="Fermer"
+        class="absolute right-6 top-20 text-inkOnDark transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:underline"
+        @click="$emit('close')"
+      >
         <Icon icon="mdi:close" class="size-8" />
       </button>
 
@@ -88,7 +95,7 @@
         <div class="flex flex-col gap-20 items-start lg:flex-row lg:items-center lg:gap-32 ">
           <div class="flex flex-col gap-4">
             <p class="text-xs">01 / WEB DEVELOPMENT</p>
-            <p class="text-4xl text-accentLight font-light md:text-5xl">Code as <br/> Architecture</p>
+            <p id="web-panel-title" class="text-4xl font-light text-accentLight md:text-5xl">Code as <br/> Architecture</p>
           </div>
 
           <!-- Skills -->
@@ -100,8 +107,8 @@
               Pas de complexité inutile — uniquement l'essentiel, bien exécuté.
             </p>
             <div class="flex flex-wrap gap-4">
-              <div v-for="skill in skills" :key="skill.id" class="group flex flex-col items-center gap-2 transition-all duration-500 ease-linear hover:scale-110 hover:text-accentLight ">
-                <Icon :icon="skill.icon" class="text-2xl transition-all duration-500 ease-linear group-hover:rotate-12" />
+              <div v-for="skill in skills" :key="skill.id" class="flex flex-col items-center gap-2">
+                <Icon :icon="skill.icon" class="text-2xl" />
                 <p class="text-xs">{{ skill.name }}</p>
               </div>
             </div>
@@ -110,27 +117,17 @@
 
         <!-- Projects -->
         <hr class="my-20 border-stone-500/20" />
-        <div class="flex flex-col gap-20">
-          <div v-for="project in projects" :key="project.id" class="flex flex-col gap-12 mb-20 lg:flex-row md:items-center lg:gap-32">
-            <div class="flex flex-col gap-4 lg:flex-1">
-              <p class="text-xl text-accentLight lg:text-2xl">{{ project.name }}</p>
-              <p class="text-lg">{{ project.description }}</p>
-              <div class="flex flex-wrap gap-2">
-                <p>Stack : 
-                  <span v-for="(stack, index) in project.stack" :key="stack" class="text-sm">
-                    {{ stack }}<span v-if="index < project.stack.length - 1"> - </span>
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div class="flex w-full h-80 mt-10 bg-stone-500 rounded-lg lg:flex-1 lg:mt-0">
-              <a :href="project.link" target="_blank" class="block w-full h-full">
-                <img :src="project.cover" :alt="project.name" class="w-full h-full object-cover rounded-lg object-top" />
-              </a>
-            </div>
-
-          </div>
-
+        <div class="flex flex-col gap-8">
+          <ProjectCard
+            v-for="project in projects"
+            :key="project.id"
+            tone="dark"
+            :title="project.name"
+            :summary="project.summary"
+            :cover="project.cover"
+            :stack="project.stack"
+            :demo-url="project.link || undefined"
+          />
         </div>
       </div>
     </div>

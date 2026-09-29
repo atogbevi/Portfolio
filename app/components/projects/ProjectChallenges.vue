@@ -13,45 +13,52 @@ function splitProblem(problem: string) {
 </script>
 
 <template>
-  <section class="mt-28 max-w-3xl lg:mt-36">
-    <h2 class="font-['Newsreader'] text-3xl font-light text-primaryText md:text-4xl">
-      Problèmes rencontrés et solutions
-    </h2>
+  <section class="mt-14 lg:mt-16">
+    <div class="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 bg-surfaceDark py-12 text-inkOnDark sm:py-16">
+      <div class="mx-auto max-w-3xl px-6 lg:px-10">
+        <h2 class="font-['Newsreader'] text-2xl font-light md:text-3xl">
+          Problèmes rencontrés et solutions
+        </h2>
 
-    <div class="mt-12 flex flex-col gap-8">
-      <article
-        v-for="challenge in challenges"
-        :key="challenge.problem"
-        class="rounded-xl border border-borderLight bg-cardBg p-6 md:p-8"
-      >
-        <h3
-          v-if="splitProblem(challenge.problem).lead"
-          class="text-2xl font-light leading-snug text-primaryText"
-        >
-          {{ splitProblem(challenge.problem).lead }}
-        </h3>
+        <div class="mt-6 flex flex-col">
+          <article
+            v-for="(challenge, index) in challenges"
+            :key="challenge.problem"
+            class="border-t border-borderOnDark py-6"
+          >
+            <p class="text-sm font-medium tabular-nums text-accentLightBlue">
+              {{ String(index + 1).padStart(2, '0') }}
+            </p>
+            <h3
+              v-if="splitProblem(challenge.problem).lead"
+              class="mt-2 text-xl font-light leading-snug"
+            >
+              {{ splitProblem(challenge.problem).lead }}
+            </h3>
 
-        <p class="mt-6 text-xs font-medium uppercase tracking-[0.2em] text-secondaryText">
-          Problème
-        </p>
-        <p class="mt-3 text-base leading-relaxed text-primaryText">
-          {{ splitProblem(challenge.problem).body }}
-        </p>
+            <p class="mt-4 text-xs font-medium uppercase tracking-[0.16em] text-accentLightBlue">
+              Problème
+            </p>
+            <p class="mt-2 text-base leading-relaxed">
+              {{ splitProblem(challenge.problem).body }}
+            </p>
 
-        <p class="mt-8 text-xs font-medium uppercase tracking-[0.2em] text-secondaryText">
-          Solution
-        </p>
-        <p class="mt-3 text-base leading-relaxed text-primaryText">
-          {{ challenge.solution }}
-        </p>
+            <p class="mt-4 text-xs font-medium uppercase tracking-[0.16em] text-accentLightBlue">
+              Solution
+            </p>
+            <p class="mt-2 text-base leading-relaxed">
+              {{ challenge.solution }}
+            </p>
 
-        <ProjectMedia
-          v-if="challenge.image"
-          class="mt-8"
-          :src="challenge.image"
-          :alt="splitProblem(challenge.problem).lead || challenge.solution"
-        />
-      </article>
+            <ProjectMedia
+              v-if="challenge.image"
+              class="mt-4"
+              :src="challenge.image"
+              :alt="splitProblem(challenge.problem).lead || challenge.solution"
+            />
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 </template>

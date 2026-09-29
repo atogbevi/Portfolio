@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 
 import WebServices from '~/components/WebServices.vue'
 import DataServices from '~/components/DataServices.vue'
@@ -34,14 +34,15 @@ const services = [
     cover: '/images/cover4.jpg',
     component: DataServices,
   },
-  {
-    id: 4,
-    title: 'Photographie',
-    description: 'Nous capturons des instants et créons des histoires visuelles.',
-    icon: 'mdi:camera',
-    cover: '/images/cover3.jpg',
-    component: PhotoServices,
-  },
+  // Service de photographie désactivé pour le moment
+  // {
+  //   id: 4,
+  //   title: 'Photographie',
+  //   description: 'Nous capturons des instants et créons des histoires visuelles.',
+  //   icon: 'mdi:camera',
+  //   cover: '/images/cover3.jpg',
+  //   component: PhotoServices,
+  // },
 ]
 
 /* ======================
@@ -62,9 +63,25 @@ const currentServiceComponent = computed(() => {
 /* ======================
    SIDE EFFECTS
 ====================== */
-watch(serviceOpen, (val) => {
-  document.body.style.overflow = val ? 'hidden' : 'auto'
+watch(serviceOpen, async (open) => {
+  if (!import.meta.client) return
+  document.body.style.overflow = open ? 'hidden' : ''
+  if (!open) return
+  await nextTick()
+  const dialog = document.querySelector<HTMLElement>('[role="dialog"]')
+  const close = dialog?.querySelector<HTMLElement>('[data-panel-close]')
+  ;(close ?? dialog)?.focus()
 })
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key !== 'Escape' || !serviceOpen.value) return
+  if (event.defaultPrevented || document.querySelector('dialog[open]')) return
+  event.preventDefault()
+  closeService()
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 function syncHeaderSurface() {
   if (!serviceOpen.value || activeService.value === null) {
@@ -83,15 +100,14 @@ watch([serviceOpen, activeService], syncHeaderSurface, { immediate: true })
 <template>
   <div class="bg-background">
 
-    <!-- HERO -->
-    <HeroSection :inactive="serviceOpen" />
-
-    <!-- SERVICES HUB -->
-    <ServiceHub
-      :services="services"
-      :inactive="serviceOpen"
-      @open="openService"
-    />
+    <div :inert="serviceOpen ? true : undefined">
+      <HeroSection :inactive="serviceOpen" />
+      <ServiceHub
+        :services="services"
+        :inactive="serviceOpen"
+        @open="openService"
+      />
+    </div>
 
     <!-- ACTIVE SERVICE -->
     <component
