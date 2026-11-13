@@ -56,7 +56,7 @@
         summary: "SUCU accompagne les étudiants dans le choix de leur parcours, avec des modèles psychométriques et un algorithme de recommandation.",
         stack: ['Nuxt', 'Tailwind', 'FastAPI', 'MongoDB','Python'],
         cover: '/images/websites/project1.jpg',
-        link: 'https://web-sucu.vercel.app/',
+        link: 'https://sucu.onrender.com',
       },
     
       {
