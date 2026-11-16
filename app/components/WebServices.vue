@@ -1,9 +1,15 @@
 <script setup>
     import { Icon } from '@iconify/vue';
+    import {projects as caseStudies} from '~/data/projects'
 
     defineProps({
       active: Boolean,
     })
+
+    function caseStudyFor(card) {
+      if (!card.slug) return null
+      return caseStudies.find(item => item.slug === card.slug) ?? null
+    }
 
     const skills = [
       {
@@ -42,32 +48,34 @@
     const projects = [
       {
           id: 1,
+          slug: 'health-map',
           name: 'HealthMap — Cartographie des acteurs et infrastructures de santé au Togo',
           description: "HealthMap est une plateforme web dédiée à l’exploration et à la visualisation des données liées au secteur de la santé au Togo. Le projet permet de rechercher et filtrer différentes entités du secteur, notamment les pharmacies, laboratoires, établissements et acteurs de la HealthTech, tout en explorant leurs informations et leur localisation. Une attention particulière a été portée à la collecte, au nettoyage et à la structuration des données. Plusieurs jeux de données géospatiales issus de GEODATA Togo ont été traités avec Python et Pandas avant d’être intégrés dans une base PostgreSQL via Supabase. La plateforme comprend également un dashboard permettant d’explorer la répartition des entités par catégorie et par zone géographique.",
           summary: "Rechercher et filtrer pharmacies, laboratoires et acteurs de la HealthTech, et explorer leur répartition par zone.",
           stack: ['Nuxt', 'Tailwind', 'Supabase', 'Python', 'Chart.js'],
-          cover: '/images/data_analysis/project3.png',
+          cover: '/images/websites/project3.png',
           link: 'https://health-map-tau.vercel.app/',
       },
       {
         id: 2,
+        slug: 'sucu',
         name: 'Sucu - Orientation universitaire intelligente',
         description: 'SUCU est une plateforme d’aide à l’orientation conçue pour accompagner les étudiants dans le choix de leur parcours académique. Le système s’appuie sur des modèles psychométriques (RIASEC, Big Five, aptitudes) combinés à un algorithme de recommandation basé sur la similarité vectorielle. L’objectif : proposer des orientations cohérentes avec le profil, les compétences et les aspirations de chaque utilisateur. Pensé comme une réponse aux limites des dispositifs d’orientation traditionnels en Afrique, SUCU introduit une approche plus objective, personnalisée et accessible.',
         summary: "SUCU accompagne les étudiants dans le choix de leur parcours, avec des modèles psychométriques et un algorithme de recommandation.",
         stack: ['Nuxt', 'Tailwind', 'FastAPI', 'MongoDB','Python'],
-        cover: '/images/websites/project1.jpg',
+        cover: '/images/websites/project1.png',
         link: 'https://sucu.onrender.com',
       },
     
-      {
-        id: 3,
-        name: 'Vemianou - Site vitrine associatif',
-        description: 'Vémianou est une association et ce projet est un site vitrine développé pour valoriser les actions et les engagements de cette association. La plateforme permet de présenter les missions, publier des articles et mettre en avant les activités à travers une galerie d\'images. Les contenus dynamiques tels que les articles et les images sont entièrement administrable via un CMS, offrant à l’équipe une autonomie dans la gestion du site.',
-        summary: "Site vitrine pour présenter les missions, publier des articles et montrer les activités, avec des contenus administrables via un CMS.",
-        stack: ['Nuxt', 'Tailwind', 'Strapi', 'EmailJS'],
-        cover: '/images/websites/project2.jpg',
-        link: 'https://vemianou-web.vercel.app/',
-      },
+      // {
+      //   id: 3,
+      //   name: 'Vemianou - Site vitrine associatif',
+      //   description: 'Vémianou est une association et ce projet est un site vitrine développé pour valoriser les actions et les engagements de cette association. La plateforme permet de présenter les missions, publier des articles et mettre en avant les activités à travers une galerie d\'images. Les contenus dynamiques tels que les articles et les images sont entièrement administrable via un CMS, offrant à l’équipe une autonomie dans la gestion du site.',
+      //   summary: "Site vitrine pour présenter les missions, publier des articles et montrer les activités, avec des contenus administrables via un CMS.",
+      //   stack: ['Nuxt', 'Tailwind', 'Strapi', 'EmailJS'],
+      //   cover: '/images/websites/project2.jpg',
+      //   link: 'https://vemianou-web.vercel.app/',
+      // },
     ]
 
     defineEmits(['close'])
@@ -127,6 +135,7 @@
             :cover="project.cover"
             :stack="project.stack"
             :demo-url="project.link || undefined"
+            :case-study-slug="caseStudyFor(project)?.slug"
           />
         </div>
       </div>

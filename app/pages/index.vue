@@ -20,20 +20,21 @@ const services = [
   },
   {
     id: 2,
+    title: 'Analyse de données',
+    description: 'Analyse de données et aide à la décision.',
+    icon: 'mdi:chart-box',
+    cover: '/images/cover4.jpg',
+    component: DataServices,
+  },
+  {
+    id: 3,
     title: 'Design Graphique',
     description: 'Nous concevons des identités visuelles et des supports de marque.',
     icon: 'mdi:palette',
     cover: '/images/cover2.jpg',
     component: DesignServices,
   },
-  {
-    id: 3,
-    title: 'Data Analyse',
-    description: 'Analyse de données et aide à la décision.',
-    icon: 'mdi:chart-box',
-    cover: '/images/cover4.jpg',
-    component: DataServices,
-  },
+
   // Service de photographie désactivé pour le moment
   // {
   //   id: 4,
