@@ -72,16 +72,6 @@ const projects = [
         cover: '/images/data_analysis/project2.png',
         link: 'https://acces-eau-tg.streamlit.app/',
     },
-    {
-        id: 4,
-        slug: 'health-map',
-        name: 'HealthMap — Cartographie des acteurs et infrastructures de santé au Togo',
-        description: "HealthMap est une plateforme web dédiée à l’exploration et à la visualisation des données liées au secteur de la santé au Togo. Le projet permet de rechercher et filtrer différentes entités du secteur, notamment les pharmacies, laboratoires, établissements et acteurs de la HealthTech, tout en explorant leurs informations et leur localisation. Une attention particulière a été portée à la collecte, au nettoyage et à la structuration des données. Plusieurs jeux de données géospatiales issus de GEODATA Togo ont été traités avec Python et Pandas avant d’être intégrés dans une base PostgreSQL via Supabase. La plateforme comprend également un dashboard permettant d’explorer la répartition des entités par catégorie et par zone géographique.",
-        summary: "Rechercher et filtrer pharmacies, laboratoires et acteurs de la HealthTech, et explorer leur répartition par zone.",
-        stack: ['Nuxt', 'Tailwind', 'Supabase', 'Python', 'Chart.js'],
-        cover: '/images/data_analysis/project3.png',
-        link: 'https://health-map-tau.vercel.app/',
-    },
 ]
 
 defineEmits(['close'])

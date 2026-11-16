@@ -50,19 +50,20 @@ const atlasSlug = "economie-numerique-togo";
 const accesElectriciteSlug = "acces-electricite-togo";
 const accesEauPotableSlug = "acces-eau-potable-togo";
 const healthMapSlug = "health-map";
+const sucuSlug = "sucu";
 
 function filePath(file: string) {
-  return `images/data_analysis/${file}`;
+  return `images/${file}`;
 }
 
 export const projects: Project[] = [
+  // Atlas de l'économie numérique du Togo
   {
     slug: atlasSlug,
-    serviceId: 3,
+    serviceId: 2,
     title: "Atlas de l'économie numérique du Togo",
-    tagline:
-      "Où l'accès aux services numériques manque-t-il au Togo ? Un diagnostic par préfecture et par canton, construit à partir de données ouvertes.",
-    cover: filePath("economie-numerique-tg/project4.png"),
+    tagline: "Où l'accès aux services numériques manque-t-il au Togo ? Un diagnostic par préfecture et par canton, construit à partir de données ouvertes.",
+    cover: filePath("data_analysis/economie-numerique-tg/project4.png"),
     date: "Septembre 2026",
     role: "Togo AI Lab · Data challenge Économie numérique (Défi 1) · Septembre 2026 · Projet individuel (données, dashboard, rapport)",
     stack: ["Python", "pandas", "GeoPandas", "Streamlit", "Plotly", "Folium"],
@@ -107,12 +108,12 @@ export const projects: Project[] = [
         title: "Concevoir les indicateurs.",
         text: `Quatre lectures, chacune reposant sur une seule variable mesurée, sans score composite :
 
-la répartition des sites par région ;
-les points mobile money pour 10 000 habitants, par préfecture ;
-le lien entre population et nombre de sites (corrélation r = 0,935) ;
-la distance au point d'accès le plus proche, par canton.
+              la répartition des sites par région ;
+              les points mobile money pour 10 000 habitants, par préfecture ;
+              le lien entre population et nombre de sites (corrélation r = 0,935) ;
+              la distance au point d'accès le plus proche, par canton.
 
-Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc approximé le centre de chaque canton par la position moyenne de ses agents mobile money, puis mesuré (en mètres, projection UTM 31N) la distance jusqu'au point d'accès actif le plus proche. Les cantons sont ensuite classés en quatre groupes égaux.`,
+              Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc approximé le centre de chaque canton par la position moyenne de ses agents mobile money, puis mesuré (en mètres, projection UTM 31N) la distance jusqu'au point d'accès actif le plus proche. Les cantons sont ensuite classés en quatre groupes égaux.`,
       },
       {
         title: "Concevoir le dashboard.",
@@ -135,7 +136,7 @@ Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc appr
           "Lomé écrasait la carte de chaleur\n\navec le nombre brut d'agents, Lomé (32,9 % des agents) était la seule zone visible.",
         solution:
           "j'ai comparé trois pondérations. Le logarithme faisait apparaître Kara presque aussi « chaude » que Lomé (94 %), alors qu'elle compte 6,4 % des agents. J'ai retenu la racine carrée (Kara à 61 %), qui révèle les pôles secondaires sans gommer l'écart réel.",
-        image: filePath("lome-avant-apres.png"),
+        // image: filePath("lome-avant-apres.png"),
       },
       {
         problem:
@@ -166,48 +167,21 @@ Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc appr
       "Des mises à jour régulières des sources, pour suivre l'évolution du réseau.",
     ],
     gallery: [
-      {
-        src: filePath("vue-ensemble.png"),
-        caption: "Vue d'ensemble : les quatre écarts côte à côte",
-      },
-      {
-        src: filePath("infrastructure-telecom.png"),
-        caption:
-          "Infrastructure télécom : 93 sites, dont 58 % en région Maritime",
-      },
-      {
-        src: filePath("mobile-money.png"),
-        caption:
-          "Mobile money : carte de densité et classement des préfectures",
-      },
-      {
-        src: filePath("infrastructures-demographie.png"),
-        caption:
-          "Infrastructures et démographie : chaque point est une préfecture",
-      },
-      {
-        src: filePath("proximite.png"),
-        caption:
-          "Proximité : les cantons classés en quatre groupes de distance",
-      },
-      {
-        src: filePath("recommandations.png"),
-        caption:
-          "Recommandations : cinq actions, chacune reliée à sa figure d'origine",
-      },
-      {
-        src: filePath("rapport.png"),
-        caption: "Rapport : les diapositives de synthèse",
-      },
+      // {
+      //   src: filePath("vue-ensemble.png"),
+      //   caption: "Vue d'ensemble : les quatre écarts côte à côte",
     ],
   },
+
+  // Électricité, énergie propre et forêts au Togo, un diagnostic croisé
   {
     slug: accesElectriciteSlug,
-    serviceId: 3,
-    title: "Électricité, énergie propre et forêts au Togo, un diagnostic croisé",
+    serviceId: 2,
+    title:
+      "Électricité, énergie propre et forêts au Togo, un diagnostic croisé",
     tagline:
       "Peut-on électrifier les campagnes togolaises sans faire reculer les forêts ?",
-    cover: filePath("project1.png"),
+    cover: filePath("data_analysis/project1.png"),
     date: "Août 2026",
     role: "Analyse des données, développement du tableau de bord, rédaction du rapport.",
     stack: [
@@ -310,44 +284,18 @@ Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc appr
       "Croiser températures et forêts, ce qui demande d'associer chaque ville à sa région.",
     ],
     gallery: [
-      {
-        src: filePath("acces-electricite/accueil.png"),
-        caption:
-          "Page d'accueil : indicateurs clés, chacun avec son année de mesure.",
-      },
-      {
-        src: filePath("acces-electricite/acces-electricite.png"),
-        caption: "Accès à l'électricité : courbes nationale, urbaine et rurale.",
-      },
-      {
-        src: filePath("acces-electricite/energie-menages.png"),
-        caption: "Énergie des ménages : combustibles de cuisson en 2014 et 2017.",
-      },
-      {
-        src: filePath("acces-electricite/emissions.png"),
-        caption: "Bilan des émissions : part de chaque secteur en 2018.",
-      },
-      {
-        src: filePath("acces-electricite/climat.png"),
-        caption: "Climat : température maximale moyenne de Lomé à Dapaong.",
-      },
-      {
-        src: filePath("acces-electricite/forets.png"),
-        caption: "Carte des 53 forêts classées, colorées par région.",
-      },
-      {
-        src: filePath("acces-electricite/synthese.png"),
-        caption: "Synthèse : trois constats et trois recommandations.",
-      },
+
     ],
   },
+
+  // Diagnostic de l'accès à l'eau potable au Togo
   {
     slug: accesEauPotableSlug,
-    serviceId: 3,
+    serviceId: 2,
     title: "Diagnostic de l'accès à l'eau potable au Togo",
     tagline:
       "Où faut-il agir en priorité pour que l'accès à l'eau potable tienne dans la durée au Togo ?",
-    cover: filePath("project2.png"),
+    cover: filePath("data_analysis/project2.png"),
     date: "Septembre 2026",
     role: "Traitement des données, dashboard, rapport.",
     stack: [
@@ -452,37 +400,18 @@ Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc appr
       "Ajouter des sources couvrant les Plateaux et le Maritime.",
       "Actualiser la population avec des données plus récentes.",
     ],
-    gallery: [
-      {
-        src: filePath("acces-eau-potable/carte-ouvrages.png"),
-        caption: "Carte des 153 ouvrages, COSO au Nord et TdE au Sud.",
-      },
-      {
-        src: filePath("acces-eau-potable/entretien-regions.png"),
-        caption: "Taux d'ouvrages sans plan d'entretien par région.",
-      },
-      {
-        src: filePath("acces-eau-potable/habitants-ouvrage.png"),
-        caption: "Habitants par ouvrage, régions à couverture suffisante.",
-      },
-      {
-        src: filePath("acces-eau-potable/risque-inondation.png"),
-        caption: "Ouvrages colorés par niveau de risque d'inondation.",
-      },
-      {
-        src: filePath("acces-eau-potable/cantons-prioritaires.png"),
-        caption: "Classement des cantons prioritaires et détail du score.",
-      },
-    ],
+    gallery: [],
   },
+
+  // HealthMap— Cartographie des acteurs et infrastructures de santé au Togo
   {
     slug: healthMapSlug,
-    serviceId: 3,
+    serviceId: 1,
     title:
-      "HealthMap TG — Cartographie des acteurs et infrastructures de santé au Togo",
+      "HealthMap — Cartographie des acteurs et infrastructures de santé au Togo",
     tagline:
       "Comment rendre les données de santé au Togo plus faciles à explorer, comparer et comprendre ?",
-    cover: filePath("project3.png"),
+    cover: filePath("websites/project3.png"),
     date: "",
     role: "Conception, développement web et traitement des données.",
     stack: [
@@ -584,25 +513,148 @@ Pour cette dernière, je n'avais pas les frontières des cantons. J'ai donc appr
       "Ajouter le calcul de distance entre un utilisateur et les structures de santé disponibles.",
       "Enrichir progressivement la base avec davantage de structures et de sources de données vérifiées.",
     ],
-    gallery: [
+    gallery: [],
+  },
+
+  // SUCU - Orientation universitaire intelligente
+  {
+    slug: sucuSlug,
+    serviceId: 1,
+    title:
+      "SUCU — Système Universitaire de Conseil et d’Orientation Intelligente",
+    tagline:
+      "Comment aider chaque étudiant à trouver une voie qui lui correspond, tout en tenant compte des possibilités de formation disponibles localement ?",
+    cover: filePath("websites/project1.png"),
+    date: "",
+    role:
+      "Conception du projet, définition du système d'orientation, conception du modèle de recommandation et développement de la plateforme.",
+    stack: [
+      "Nuxt 3",
+      "Tailwind CSS",
+      "Python",
+      "FastAPI",
+      "MongoDB",
+      "Système de recommandation",
+      "Analyse psychométrique",
+    ],
+    links: {},
+
+    context: [
+      "SUCU est une plateforme numérique conçue dans le cadre de mon mémoire de fin de licence . Elle a été conçue pour accompagner les élèves et étudiants dans leurs choix d'orientation universitaire. Le projet est né d'une expérience personnelle : après l'obtention de mon baccalauréat, j'ai moi-même rencontré des difficultés à choisir un domaine d'études. Ayant des facilités et de l'intérêt dans plusieurs matières, les possibilités d'orientation étaient nombreuses et il m'était difficile d'identifier le parcours qui me correspondait réellement. J'ai souvent pensé que disposer d'un accompagnement structuré à cette étape m'aurait permis de gagner du temps, d'économiser de l'énergie et d'éviter une partie du stress lié à cette décision.",
+      "Cette difficulté n'est pas isolée. De nombreux étudiants s'engagent dans des parcours sans avoir suffisamment exploré leurs intérêts, leurs aptitudes ou les différentes possibilités qui s'offrent à eux. Certains découvrent après plusieurs semestres que leur formation ne correspond pas à leurs attentes et doivent envisager une réorientation, avec les conséquences que cela peut entraîner sur leur parcours, leur temps et leurs ressources financières.",
+      "Un autre constat concerne les outils d'orientation existants. Certains tests et plateformes internationaux proposent des approches intéressantes pour mieux connaître son profil, mais leurs recommandations ne tiennent pas nécessairement compte des réalités du contexte togolais et, plus largement, des environnements éducatifs locaux. Les domaines d'études proposés, les établissements référencés et les parcours accessibles peuvent être éloignés des possibilités concrètes offertes aux étudiants dans leur environnement.",
+      "C'est dans cette perspective que j'ai imaginé SUCU : une solution qui combine l'analyse du profil individuel avec une connaissance des possibilités de formation disponibles localement. La plateforme s'appuie sur un questionnaire de 27 questions explorant trois dimensions : les intérêts professionnels à travers le modèle RIASEC, certains traits de personnalité selon le modèle Big Five et des aptitudes cognitives. Les réponses sont ensuite traitées par un système de recommandation à scores pondérés qui met en relation le profil de l'utilisateur avec des profils de référence associés aux domaines d'études.",
+      "L'objectif ne se limite pas à suggérer des filières. SUCU ambitionne également de rapprocher les recommandations des établissements et programmes de formation correspondants, afin de transformer une réflexion sur l'orientation en pistes concrètes à explorer."
+    ],
+
+    kpis: [
       {
-        src: filePath("health-map/vue-ensemble.png"),
-        caption: "Vue d'ensemble de la plateforme HealthMap TG.",
+        value: "27",
+        label: "questions dans le questionnaire d'orientation",
       },
       {
-        src: filePath("health-map/dashboard.png"),
-        caption:
-          "Dashboard présentant la répartition des entités par catégorie.",
+        value: "3",
+        label: "dimensions explorées : RIASEC, Big Five et aptitudes cognitives",
       },
       {
-        src: filePath("health-map/recherche.png"),
-        caption: "Interface de recherche et de filtrage des acteurs de santé.",
+        value: "10",
+        label: "domaines d'études représentés dans les données initiales",
       },
       {
-        src: filePath("health-map/fiche-entite.png"),
-        caption:
-          "Vue détaillée d'une entité avec ses informations géographiques et ses services.",
+        value: "7",
+        label: "établissements intégrés dans le référentiel initial",
+      },
+      {
+        value: "10",
+        label: "programmes de formation référencés dans les données initiales",
       },
     ],
+
+    steps: [
+      {
+        title: "Identifier la problématique et définir l'approche.",
+        text: "Le projet est parti d'une difficulté réelle rencontrée lors de mon propre parcours d'orientation après le baccalauréat. J'ai ensuite élargi cette réflexion aux difficultés que peuvent rencontrer d'autres étudiants. J'ai également pris en considération les limites des outils d'orientation internationaux lorsqu'il s'agit de proposer des parcours et des établissements adaptés aux réalités locales. Cette réflexion a permis de définir une approche associant connaissance de soi et exploration de l'offre de formation locale.",
+      },
+      {
+        title: "Concevoir le questionnaire d'orientation.",
+        text: "J'ai conçu un questionnaire de 27 questions organisé autour de trois dimensions complémentaires. Le modèle RIASEC explore six types d'intérêts : Réaliste, Investigateur, Artistique, Social, Entreprenant et Conventionnel. Le modèle Big Five permet d'explorer cinq grands traits de personnalité. Enfin, une série de questions d'aptitudes propose quelques exercices de logique, de raisonnement et de compréhension. L'objectif est de construire une représentation plus complète du profil de l'utilisateur, sans réduire son orientation à un seul critère.",
+      },
+      {
+        title: "Concevoir le système de recommandation.",
+        text: "Compte tenu de la disponibilité limitée de données d'entraînement suffisamment fiables, j'ai privilégié une approche fondée sur des scores pondérés plutôt qu'un modèle de Machine Learning supervisé. Le principe consiste à comparer les résultats de l'utilisateur avec des profils de référence définis pour les différents domaines d'études. Les dimensions évaluées contribuent ensuite au calcul d'un score global de compatibilité. Cette approche permet de conserver une logique de recommandation explicable, dont les critères peuvent être examinés et ajustés.",
+      },
+      {
+        title: "Structurer les données de référence.",
+        text: "J'ai organisé les données nécessaires au fonctionnement du système : questions, paramètres de calcul (keymap), domaines d'études, établissements et programmes de formation. Ces informations constituent le référentiel qui permet de traiter les réponses, de calculer les recommandations et de préparer la mise en relation entre les domaines suggérés et les possibilités de formation disponibles.",
+      },
+      {
+        title: "Développer l'API et la logique métier.",
+        text: "Le backend repose sur Python et FastAPI, un framework permettant de développer des API. Il prend en charge le traitement des réponses, la logique de calcul et le fonctionnement du système de recommandation. MongoDB est utilisé pour stocker les données du projet. Cette architecture permet de séparer les traitements métier de l'interface utilisateur et de faciliter leur communication.",
+      },
+      {
+        title: "Construire l'interface utilisateur.",
+        text: "Le frontend est développé avec Nuxt 3 et Vue.js, avec Tailwind CSS pour la conception de l'interface. L'expérience utilisateur est pensée autour d'un parcours progressif : répondre au questionnaire, obtenir une analyse de son profil et découvrir des domaines d'études susceptibles de lui correspondre. L'objectif est de rendre l'outil accessible et compréhensible, même pour les utilisateurs qui ne possèdent pas de connaissances particulières en psychométrie ou en informatique.",
+      },
+    ],
+
+    challenges: [
+      {
+        problem:
+          "Une orientation difficile face à de nombreuses possibilités\n\nCertains étudiants ont des intérêts et des facilités dans plusieurs matières, ce qui rend le choix d'une filière particulièrement complexe.",
+        solution:
+          "J'ai conçu une approche qui prend en compte plusieurs dimensions du profil individuel afin de proposer des pistes d'orientation plus structurées qu'une simple sélection fondée sur les matières préférées ou les résultats scolaires.",
+      },
+      {
+        problem:
+          "Des outils d'orientation pas toujours adaptés au contexte local\n\nLes tests internationaux peuvent proposer des recommandations intéressantes sans nécessairement tenir compte des filières, des établissements et des parcours de formation accessibles au Togo.",
+        solution:
+          "J'ai intégré la dimension locale dès la conception du projet, avec l'objectif de constituer un référentiel d'établissements et de programmes de formation disponibles dans l'environnement éducatif ciblé.",
+      },
+      {
+        problem:
+          "Un manque de données d'entraînement\n\nLa disponibilité limitée de données suffisamment nombreuses et fiables constituait un obstacle à l'utilisation d'un modèle de Machine Learning supervisé.",
+        solution:
+          "J'ai privilégié un système de recommandation fondé sur des scores pondérés et des profils de référence. Cette approche permet de construire un premier système dont les critères de calcul sont explicites et ajustables.",
+      },
+      {
+        problem:
+          "Des dimensions de profil difficiles à comparer\n\nLes intérêts professionnels, les traits de personnalité et les aptitudes cognitives sont mesurés différemment et ne peuvent pas être directement comparés.",
+        solution:
+          "J'ai structuré les résultats par dimension afin de permettre leur traitement distinct, puis leur intégration dans un système de scoring reposant sur une logique de normalisation et de pondération.",
+      },
+      {
+        problem:
+          "Transformer une recommandation en possibilité concrète\n\nIdentifier un domaine d'études pertinent ne suffit pas si l'étudiant ne sait pas où suivre la formation ni quels programmes sont disponibles.",
+        solution:
+          "J'ai prévu un référentiel associant les domaines d'études aux établissements et aux programmes de formation, afin de rapprocher les recommandations des possibilités académiques concrètes.",
+      },
+    ],
+
+    lessons: [
+      "Un projet technologique pertinent peut partir d'une expérience personnelle. Une difficulté vécue peut devenir le point de départ d'une réflexion plus large, à condition d'identifier les besoins d'autres utilisateurs et de construire une réponse adaptée.",
+      "Un système de recommandation ne se résume pas au choix d'un algorithme. La définition des critères, la structuration des données et la construction des profils de référence jouent un rôle tout aussi important dans la pertinence des résultats.",
+      "L'explicabilité est essentielle dans un outil d'aide à la décision. L'utilisateur doit pouvoir comprendre les critères qui contribuent à une recommandation plutôt que recevoir un résultat sans justification.",
+      "L'adaptation au contexte d'utilisation est aussi importante que la technologie employée. Un outil d'orientation doit tenir compte non seulement du profil de l'utilisateur, mais également des possibilités de formation auxquelles il peut réellement accéder.",
+      "Les résultats issus d'un questionnaire psychométrique doivent être interprétés avec précaution. Ils constituent des indications utiles à la réflexion, mais ne déterminent ni les capacités ni l'avenir académique d'une personne.",
+    ],
+
+    limits: [
+      "Les profils de référence et les pondérations du système nécessitent encore une validation et des ajustements à partir de travaux documentaires et de retours d'utilisateurs.",
+      "Le questionnaire est conçu comme un outil d'aide à l'orientation et ne constitue pas un instrument psychométrique professionnellement validé.",
+      "Le référentiel initial d'établissements et de programmes ne couvre pas encore l'ensemble de l'offre de formation disponible au Togo.",
+      "La pertinence et la stabilité des recommandations doivent encore être étudiées auprès d'un échantillon plus large d'utilisateurs.",
+      "La qualité des recommandations dépend également de l'actualisation et de la fiabilité des informations sur les établissements et les programmes de formation.",
+    ],
+
+    next: [
+      "Évaluer le système de recommandation auprès d'un échantillon plus large d'élèves et d'étudiants afin d'étudier la cohérence des résultats et d'améliorer les profils de référence.",
+      "Enrichir le référentiel des établissements et des programmes de formation au Togo, puis étudier son extension à d'autres pays de la sous-région.",
+      "Améliorer l'explicabilité des résultats en présentant les dimensions du profil ayant contribué à chaque recommandation.",
+      "Faire évoluer le questionnaire et le modèle de scoring à partir de travaux de validation, de recherches documentaires et des retours d'expérience.",
+      "Développer davantage les fonctionnalités d'accompagnement pour permettre aux utilisateurs de comparer les parcours et d'explorer les possibilités de formation associées aux recommandations.",
+    ],
+
+    gallery: [],
   },
+
 ];
